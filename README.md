@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Custom Authentication Flow
 
-## Getting Started
+A production-grade authentication flow implemented in Next.js using custom React hooks for state management, client-side input validation, protected routing, and simulated backend API latency.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- **Custom React Hooks**:
+  - `useAuth`: Global authentication session, user status (`loading` | `authenticated` | `unauthenticated`), and actions (`login`, `signup`, `logout`).
+  - `useLoginForm`: Dedicated form hook encapsulating email/password state, touch tracking, client-side validation, demo autofill, and submission.
+  - `useSignupForm`: Dedicated form hook managing name, email, password, and password confirmation validation.
+  - `useRequireAuth`: Protected route guard hook that redirects unauthenticated visitors to `/login` with return URL handling.
+- **Form Validation & UX**:
+  - Real-time and on-blur field error validation.
+  - Password visibility toggle.
+  - Interactive loading spinners and disabled button states during API submission.
+  - User-friendly error alert banners for invalid credentials or duplicate accounts.
+- **Simulated Backend API (`mockAuthApi`)**:
+  - Artificial network latency (800ms) with `setTimeout`.
+  - Realistic success/failure responses.
+  - Pre-seeded demo account (`demo@example.com` / `Password123!`).
+  - Session persistence via `localStorage`.
+- **Protected Routing (`ProtectedRoute`)**:
+  - Unauthenticated users attempting to access `/dashboard` are automatically redirected to `/login?redirect=%2Fdashboard`.
+  - Smooth loading indicators during session hydration.
+
+---
+
+## 🛠️ Project Structure
+
+```text
+src/
+├── app/
+│   ├── layout.tsx            # Global layout wrapped with AuthProvider
+│   ├── globals.css           # Glassmorphism design tokens & styles
+│   ├── page.tsx              # Public home page
+│   ├── login/page.tsx        # Login page (pure UI consuming useLoginForm)
+│   ├── signup/page.tsx       # Signup page (pure UI consuming useSignupForm)
+│   └── dashboard/page.tsx    # Protected route with user details & logout
+├── components/
+│   ├── Alert.tsx             # Error and success alert component
+│   ├── Button.tsx            # Loading-capable button component
+│   ├── FormInput.tsx         # Accessible input with error states
+│   ├── Navbar.tsx            # Header showing session status & actions
+│   └── ProtectedRoute.tsx    # Route guard wrapper
+├── context/
+│   └── AuthContext.tsx       # React Context holding global session
+├── hooks/
+│   ├── useAuth.ts            # Primary authentication hook
+│   ├── useLoginForm.ts       # Login form state and validation logic
+│   ├── useSignupForm.ts      # Registration form state and validation logic
+│   └── useRequireAuth.ts     # Protected route redirection hook
+├── services/
+│   └── mockAuthApi.ts        # Simulated backend service
+└── types/
+    └── auth.ts               # TypeScript types and interfaces
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏃 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Install dependencies
+npm install
 
-## Learn More
+# Run the development server
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# Build for production
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🔑 Demo Credentials
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Email | Password |
+|---|---|
+| `demo@example.com` | `Password123!` |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*(You can also click the **"⚡ Click to autofill demo account"** button on the login page)*
