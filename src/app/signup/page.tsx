@@ -23,7 +23,15 @@ export default function SignupPage() {
     <div className="page-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1 className="auth-title">Create Account</h1>
+          <div className="auth-brand-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="8.5" cy="7" r="4" />
+              <line x1="20" y1="8" x2="20" y2="14" />
+              <line x1="23" y1="11" x2="17" y2="11" />
+            </svg>
+          </div>
+          <h1 className="auth-title">Create an account</h1>
           <p className="auth-subtitle">Get started with our simulated authentication flow</p>
         </div>
 
@@ -32,10 +40,10 @@ export default function SignupPage() {
         <form onSubmit={handleSubmit} className="form-stack" noValidate>
           <FormInput
             id="signup-name"
-            label="Full Name"
+            label="Full name"
             type="text"
             name="name"
-            placeholder="e.g. Alex Johnson"
+            placeholder="Alex Johnson"
             value={values.name}
             error={errors.name}
             touched={touched.name}
@@ -47,10 +55,10 @@ export default function SignupPage() {
 
           <FormInput
             id="signup-email"
-            label="Email Address"
+            label="Email address"
             type="email"
             name="email"
-            placeholder="e.g. alex@example.com"
+            placeholder="alex@example.com"
             value={values.email}
             error={errors.email}
             touched={touched.email}
@@ -77,7 +85,7 @@ export default function SignupPage() {
 
           <FormInput
             id="signup-confirm-password"
-            label="Confirm Password"
+            label="Confirm password"
             type="password"
             name="confirmPassword"
             placeholder="Re-enter your password"
@@ -96,7 +104,7 @@ export default function SignupPage() {
             fullWidth
             isLoading={isSubmitting}
           >
-            {isSubmitting ? 'Creating account...' : 'Create Account'}
+            {isSubmitting ? 'Creating account...' : 'Create account'}
           </Button>
         </form>
 

@@ -33,7 +33,7 @@ A production-grade authentication flow implemented in Next.js using custom React
 src/
 ├── app/
 │   ├── layout.tsx            # Global layout wrapped with AuthProvider
-│   ├── globals.css           # Glassmorphism design tokens & styles
+│   ├── globals.css           # Clean, minimalist design tokens & styles (light/dark theme)
 │   ├── page.tsx              # Public home page
 │   ├── login/page.tsx        # Login page (pure UI consuming useLoginForm)
 │   ├── signup/page.tsx       # Signup page (pure UI consuming useSignupForm)
@@ -42,7 +42,7 @@ src/
 │   ├── Alert.tsx             # Error and success alert component
 │   ├── Button.tsx            # Loading-capable button component
 │   ├── FormInput.tsx         # Accessible input with error states
-│   ├── Navbar.tsx            # Header showing session status & actions
+│   ├── Navbar.tsx            # Header showing session status, actions & theme toggle
 │   └── ProtectedRoute.tsx    # Route guard wrapper
 ├── context/
 │   └── AuthContext.tsx       # React Context holding global session
@@ -82,4 +82,4 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 |---|---|
 | `demo@example.com` | `Password123!` |
 
-*(You can also click the **"⚡ Click to autofill demo account"** button on the login page)*
+*(You can also click the **"Auto-fill"** demo button on the login page)*

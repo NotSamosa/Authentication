@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { Navbar } from '@/components/Navbar';
 
 export const metadata: Metadata = {
-  title: 'Next.js AuthFlow - Custom React Hooks Authentication',
-  description: 'Production-ready authentication flow with simulated API latency, custom hooks, and route protection.',
+  title: 'AuthFlow - Clean Authentication with Custom React Hooks',
+  description: 'A clean, modern authentication system built with custom React hooks, client-side validation, and simulated API latency.',
 };
 
 export default function RootLayout({
@@ -14,7 +15,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+          id="theme-initializer"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('theme');
+                  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body>
         <AuthProvider>
           <div className="main-wrapper">
